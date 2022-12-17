@@ -1,16 +1,17 @@
 package CopKutusu;
 
-import java.util.ArrayList;
-
 public class Sensor extends CopKutusu {
 
     private int dolulukOrani;
     private boolean doldu = false;
 
-    int copKutusu[];
+    
 
-    public Sensor() {
+    int[] copKutusu = new int[30];
+
+    public Sensor(Adres a) {
         a.insanSayisi();
+        copKutusuOlustur(a);
     }
 
     public void verileriGoruntule() {
@@ -19,13 +20,22 @@ public class Sensor extends CopKutusu {
 
     public void dolulukOraniHesapla() {
         for (int i = 0; i < getCopKutusuSayisi(); i++) {
-            System.out.println("1.çöpün doluluğu : "+copKutusu[i]);
+            System.out.println((i+1)+".çöpün doluluğu : "+copKutusu[i]);
 
             if(copKutusu[i]>90){
-                System.out.println("doldu");
+                System.out.println((i+1)+". çöp doldu - boşaltılıyor");
+                
                 doldu = true;
+                copKutusu[i] = 0;
             }
         }
+    }
+
+
+    public int copKutusuSecme() {
+        int a = (int) (Math.random() * getCopKutusuSayisi() );
+        System.out.println(a);
+        return a;
     }
 
     @Override
@@ -37,10 +47,11 @@ public class Sensor extends CopKutusu {
     }
 
     @Override
-    public void copAt() {
-
-        for (int i = 1; i <= a.getInsanSayisi(); i++) {
-            copKutusu[a.copKutusuSecme()] = (int) (Math.random() * 15 + 1);
+    public void copAt(Adres a) {
+            copKutulari();
+        for (int i = 1; i <= a.getInsanSayisi()*5; i++) {
+            int test = (int) (Math.random() * 15 + 1);
+            copKutusu[copKutusuSecme()] += test;
             System.out.println("Çöp atıldı ");
             dolulukOraniHesapla();
             

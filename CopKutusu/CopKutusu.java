@@ -3,13 +3,13 @@ package CopKutusu;
 public abstract class CopKutusu {
     private int id;
     private int copKutusuSayisi;
-    Adres a = new Adres();
+    
 
     public CopKutusu() {
 
     }
 
-    public void copKutusuOlustur() {
+    public void copKutusuOlustur(Adres a) {
         if (a.getInsanSayisi() <= 5) {
             copKutusuSayisi = 1;
         } else {
@@ -19,7 +19,7 @@ public abstract class CopKutusu {
 
     public abstract void copKutulari();
 
-    public abstract void copAt();
+    public abstract void copAt(Adres a);
 
     public int getId() {
         return id;
