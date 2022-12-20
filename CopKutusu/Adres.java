@@ -9,7 +9,7 @@ public class Adres {
     }
 
     public void insanSayisi() {
-        insanSayisi = (int) (Math.random() * 30 + 1);
+        insanSayisi = (int) (Math.random() * 20 + 4);
     }
 
     

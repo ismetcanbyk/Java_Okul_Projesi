@@ -8,6 +8,6 @@ public class Main {
         
         s1.copAt(a);
         
-        
+       
     }
 }
