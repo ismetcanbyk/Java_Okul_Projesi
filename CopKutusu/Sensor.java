@@ -1,12 +1,16 @@
 package CopKutusu;
 
-import CopToplama.CopToplama;
+import CopToplama.CopKamyonu;
+import CopToplama.CopTaksi;
+
 
 public class Sensor extends CopKutusu implements Runnable {
 
     private boolean doldu = false;
-
+    CopTaksi taksi = new CopTaksi();
+    CopKamyonu kamyon = new CopKamyonu();
     int[] copKutusu = new int[30];
+    int[] dupCop = new int[15];
 
     public Sensor(Adres a) {
         a.insanSayisi();
@@ -16,22 +20,15 @@ public class Sensor extends CopKutusu implements Runnable {
     public void verileriGoruntule() {
 
     }
+    
 
-    public void dolulukOraniHesapla() {
-
-    }
 
     public void copArabasiBelirle(int i) {
         if (i == 1) {
-            System.out.println("Taksi");
-            System.out.println("  ______");
-            System.out.println(" /|_||_\\`.__");
-            System.out.println("(   _    _ _\\");
-            System.out.println("=`-(_)--(_)-'");
+            taksi.copArabasiBilgi(); 
         }
         if (i >= 3) {
-            System.out.println("Kamyon");
-
+           kamyon.copArabasiBilgi();
         }
 
     }
@@ -69,10 +66,13 @@ public class Sensor extends CopKutusu implements Runnable {
             for (int i = 0; i < getCopKutusuSayisi(); i++) {
                 System.out.println((i + 1) + ".çöpün doluluğu : " + copKutusu[i]);
                 Thread.sleep(750);
+                
                 if (copKutusu[i] > 55) {
                     counterKamyon++;
+                    dupCop[i] = copKutusu[i];
                     if (counterKamyon >= 3) {
                         copArabasiBelirle(counterKamyon);
+                        
                     }
                 }
 

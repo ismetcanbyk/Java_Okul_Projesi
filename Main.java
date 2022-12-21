@@ -7,7 +7,7 @@ public class Main {
         Sensor s1 = new Sensor(a);
         
         s1.copAt(a);
-        
+      
        
     }
 }
