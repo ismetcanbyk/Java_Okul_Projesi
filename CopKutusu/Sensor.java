@@ -72,7 +72,8 @@ public class Sensor extends CopKutusu implements Runnable {
                     dupCop[i] = copKutusu[i];
                     if (counterKamyon >= 3) {
                         copArabasiBelirle(counterKamyon);
-                        
+                        kamyon.copBosalt(dupCop);
+                    
                     }
                 }
 

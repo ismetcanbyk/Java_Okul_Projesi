@@ -15,7 +15,7 @@ public class CopKamyonu extends CopToplama {
     }
 
     @Override
-    public void copBosalt(int... a) {
+    public void copBosalt(int[]  a) {
        
     }
 }
