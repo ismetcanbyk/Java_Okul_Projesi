@@ -13,18 +13,17 @@ public class CopKamyonu extends CopToplama {
         System.out.println("|____|-|__________|");
         System.out.println("  O      O     O");
         System.out.println("Çöp Kamyonu geldi.");
-        System.out.println("Bütün çöpler toplandı.");
+        System.out.println("Bütün çöpler toplanıyor...");
         System.out.println("\n\n");
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-        
     }
 
     @Override
-    public void copBosalt(int[] a,int x) {
+    public void copBosalt(int[] a) {
         for (int i = 0; i < a.length; i++) {
             a[i] = 0;
         }

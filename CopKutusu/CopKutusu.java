@@ -2,13 +2,11 @@ package CopKutusu;
 
 public abstract class CopKutusu {
 
-    private int copKutusuSayisi;
+    private static int copKutusuSayisi;
 
     public CopKutusu() {
 
     }
-
-    
 
     public void copKutusuOlustur(Adres a) {
         if (a.getInsanSayisi() <= 5) {
@@ -18,19 +16,13 @@ public abstract class CopKutusu {
         } else {
             copKutusuSayisi = a.getInsanSayisi() / 5 + 1;
         }
-
     }
 
     public abstract void copKutulari();
 
     public abstract void copAt(Adres a);
 
-    public int getCopKutusuSayisi() {
+    public static int getCopKutusuSayisi() {
         return copKutusuSayisi;
     }
-
-    public void setCopKutusuSayisi(int copKutusuSayisi) {
-        this.copKutusuSayisi = copKutusuSayisi;
-    }
-
 }

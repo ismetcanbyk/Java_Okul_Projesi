@@ -5,30 +5,45 @@ import CopToplama.CopTaksi;
 
 public class Sensor extends CopKutusu implements Runnable {
 
-    private boolean doldu = false;
     CopTaksi taksi = new CopTaksi();
     CopKamyonu kamyon = new CopKamyonu();
     int[] copKutusu = new int[30];
+
+    private static int taksiSayisi = 0;
+    private static int kamyonSayisi = 0;
+
+    public Sensor() {
+    }
 
     public Sensor(Adres a) {
         copKutusuOlustur(a);
     }
 
-    public void verileriGoruntule() {
-
+    public static void setTaksiSayisi(int taksiSayisi) {
+        Sensor.taksiSayisi = taksiSayisi;
     }
 
-    public void copArabasiBelirle(int i, int x) {
+    public static void setKamyonSayisi(int kamyonSayisi) {
+        Sensor.kamyonSayisi = kamyonSayisi;
+    }
+
+    public int getKamyonSayisi() {
+        return kamyonSayisi;
+    }
+
+    public int getTaksiSayisi() {
+        return taksiSayisi;
+    }
+
+    public void copArabasiBelirle(int i, int arrIndis) {
         if (i == 1) {
             taksi.copArabasiBilgi();
-            taksi.copBosalt(copKutusu, x);
-
+            taksi.copBosalt(copKutusu, arrIndis);
         }
-        if (i >= 3) {
+        if (i == 3) {
             kamyon.copArabasiBilgi();
-            kamyon.copBosalt(copKutusu, x);
+            kamyon.copBosalt(copKutusu);
         }
-
     }
 
     public int copKutusuSecme() {
@@ -40,7 +55,6 @@ public class Sensor extends CopKutusu implements Runnable {
         for (int i = 1; i <= getCopKutusuSayisi(); i++) {
             copKutusu[i] = 0;
         }
-
     }
 
     @Override
@@ -49,13 +63,12 @@ public class Sensor extends CopKutusu implements Runnable {
         for (int i = 1; i <= a.getInsanSayisi() * 5; i++) {
             int doluluk = (int) (Math.random() * 22 + 1);
             copKutusu[copKutusuSecme()] += doluluk;
-
+            
             System.out.println("\nÇöp atılıyor \n");
             run();
-
         }
     }
-
+    
     @Override
     public void run() {
         try {
@@ -72,20 +85,30 @@ public class Sensor extends CopKutusu implements Runnable {
 
                     if (counterKamyon >= 3) {
                         copArabasiBelirle(counterKamyon, i);
+                        kamyonSayisi++;
+                        counterKamyon = 0;
                     }
                 }
-
-                if (copKutusu[i] > 90) {
-                    doldu = true;
+                if (copKutusu[i] >= 90) {
                     counter++;
                     copArabasiBelirle(counter, i);
+                    taksiSayisi++;
                     counter = 0;
                 }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 
+    public class Bilgi {
+
+        public void bilgiYazdir(Adres a) {
+            System.out.println("\n------------------------");
+            System.out.println("İnsan sayısı : " + a.getInsanSayisi());
+            System.out.println("Oluşturulan çöp sayısı : " + getCopKutusuSayisi());
+            System.out.println("Gelen taksi sayısı : " + getTaksiSayisi());
+            System.out.println("Gelen kamyon sayısı : " + getKamyonSayisi());
+        }
+    }
 }
