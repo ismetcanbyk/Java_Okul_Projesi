@@ -5,7 +5,7 @@ public abstract class CopToplama {
     }
 
 
-    public abstract void copBosalt(int[] a);
+    public abstract void copBosalt(int[] a,int x);
 
     public abstract void copArabasiBilgi();
 }

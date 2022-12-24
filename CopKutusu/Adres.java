@@ -3,16 +3,18 @@ package CopKutusu;
 public class Adres {
     private int insanSayisi;
    
-
     public Adres() {
+        insanSayisi();
+    }
 
+    public Adres(int insanSAyisi){
+        this.insanSayisi = insanSAyisi;
     }
 
     public void insanSayisi() {
-        insanSayisi = (int) (Math.random() * 20 + 4);
+        this.insanSayisi = (int) (Math.random() * 20 + 4);
     }
 
-    
 
     public int getInsanSayisi() {
         return insanSayisi;

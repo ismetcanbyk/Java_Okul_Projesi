@@ -3,32 +3,30 @@ package CopKutusu;
 import CopToplama.CopKamyonu;
 import CopToplama.CopTaksi;
 
-
 public class Sensor extends CopKutusu implements Runnable {
 
     private boolean doldu = false;
     CopTaksi taksi = new CopTaksi();
     CopKamyonu kamyon = new CopKamyonu();
     int[] copKutusu = new int[30];
-    int[] dupCop = new int[15];
 
     public Sensor(Adres a) {
-        a.insanSayisi();
         copKutusuOlustur(a);
     }
 
     public void verileriGoruntule() {
 
     }
-    
 
-
-    public void copArabasiBelirle(int i) {
+    public void copArabasiBelirle(int i, int x) {
         if (i == 1) {
-            taksi.copArabasiBilgi(); 
+            taksi.copArabasiBilgi();
+            taksi.copBosalt(copKutusu, x);
+
         }
         if (i >= 3) {
-           kamyon.copArabasiBilgi();
+            kamyon.copArabasiBilgi();
+            kamyon.copBosalt(copKutusu, x);
         }
 
     }
@@ -49,9 +47,10 @@ public class Sensor extends CopKutusu implements Runnable {
     public void copAt(Adres a) {
         copKutulari();
         for (int i = 1; i <= a.getInsanSayisi() * 5; i++) {
-            int doluluk = (int) (Math.random() * 15 + 1);
+            int doluluk = (int) (Math.random() * 22 + 1);
             copKutusu[copKutusuSecme()] += doluluk;
-            System.out.println("Çöp atılıyor ");
+
+            System.out.println("\nÇöp atılıyor \n");
             run();
 
         }
@@ -65,25 +64,22 @@ public class Sensor extends CopKutusu implements Runnable {
 
             for (int i = 0; i < getCopKutusuSayisi(); i++) {
                 System.out.println((i + 1) + ".çöpün doluluğu : " + copKutusu[i]);
-                Thread.sleep(750);
-                
+
+                Thread.sleep(450);
+
                 if (copKutusu[i] > 55) {
                     counterKamyon++;
-                    dupCop[i] = copKutusu[i];
+
                     if (counterKamyon >= 3) {
-                        copArabasiBelirle(counterKamyon);
-                        kamyon.copBosalt(dupCop);
-                    
+                        copArabasiBelirle(counterKamyon, i);
                     }
                 }
 
                 if (copKutusu[i] > 90) {
-
                     doldu = true;
                     counter++;
-                    copArabasiBelirle(counter);
+                    copArabasiBelirle(counter, i);
                     counter = 0;
-                    copKutusu[i] = 0;
                 }
             }
         } catch (Exception e) {
