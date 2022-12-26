@@ -7,8 +7,8 @@ public class Adres {
         insanSayisi();
     }
 
-    public Adres(int insanSAyisi) {
-        this.insanSayisi = insanSAyisi;
+    public Adres(int insanSayisi) {
+        this.insanSayisi = insanSayisi;
     }
 
     public void insanSayisi() {
