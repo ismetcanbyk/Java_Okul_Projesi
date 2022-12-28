@@ -21,5 +21,5 @@
 
 <br>
 
-<img src="UML\JavaProjeUml.png">
+<img src="UML\JavaProje.png">
 
