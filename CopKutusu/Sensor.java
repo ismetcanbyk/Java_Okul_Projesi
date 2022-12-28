@@ -12,6 +12,7 @@ public class Sensor extends CopKutusu implements Runnable {
     private static int taksiSayisi = 0;
     private static int kamyonSayisi = 0;
 
+    //İç içe sınıfın constructor
     public Sensor() {
     }
 
